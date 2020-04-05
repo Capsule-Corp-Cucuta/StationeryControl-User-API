@@ -1,0 +1,42 @@
+#Component Info 
+info:
+ component: stationerycontrol-user-api
+
+#Port - If 0 get random port
+server:
+ port: 8083
+
+#Application Name
+spring:
+ application:
+  name: stationerycontrol-user-api
+ profiles:
+  active: dev
+ datasource:
+  url: jdbc:h2:file:~/user
+  driver-class-name: org.h2.Driver
+  username: sa
+  password:
+ jpa:
+  show-sql: true
+  hibernate:
+   ddl-auto: create-drop
+  properties:
+   hibernate.dialect: org.hibernate.dialect.H2Dialect
+ h2:
+  console.enabled: true
+  console.path: /h2
+ servlet:
+  multipart:
+   max-file-size: 100MB
+   max-request-size: 100MB
+
+#Eureka Instance ID
+eureka:
+ client:
+  registerWithEureka: true
+  fetchRegistry: true
+  serviceUrl:
+    defaultZone: http://localhost:8081/eureka/
+ instance:
+  instanceId: ${spring.application.name}:${server.port}
