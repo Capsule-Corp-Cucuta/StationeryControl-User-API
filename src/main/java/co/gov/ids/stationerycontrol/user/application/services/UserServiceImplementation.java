@@ -29,7 +29,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -40,7 +40,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -57,7 +57,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -71,7 +71,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -84,7 +84,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -97,7 +97,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
@@ -110,7 +110,7 @@ public class UserServiceImplementation implements IUserService {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     @Transactional
