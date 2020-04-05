@@ -1,6 +1,6 @@
 # StationeryControl-User-API
 
-This project was generated with [Spring Initializr](https://start.spring.io/) version 2.2.6.
+This project was generated with [Spring Initializr](https://start.spring.io/) version 2.1.7.
 
 ## Development server
 
