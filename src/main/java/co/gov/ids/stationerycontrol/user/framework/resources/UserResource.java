@@ -3,8 +3,8 @@ package co.gov.ids.stationerycontrol.user.framework.resources;
 import java.util.List;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponses;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +20,7 @@ import co.gov.ids.stationerycontrol.user.application.services.IUserService;
  */
 @RestController
 @Api(tags = "user")
-@RequestMapping("/user")
+@RequestMapping("/api/user")
 public class UserResource {
 
     private final IUserService service;
@@ -37,9 +37,9 @@ public class UserResource {
      */
     @PostMapping
     @ApiOperation(value = "Create a user", notes = "Service for create a new user")
-    @ApiResponses(value = {@ApiResponse(code = 201, message = "User was created correctly"), @ApiResponse(code = 400, message = "Invalid Request")})
+    @ApiResponses(value = {@ApiResponse(code = 201, message = "User was created correctly"),
+            @ApiResponse(code = 400, message = "Invalid Request")})
     public ResponseEntity<User> create(@RequestBody User user) {
-        System.out.println(user.toString());
         return new ResponseEntity<>(service.create(user), HttpStatus.CREATED);
     }
 
@@ -52,7 +52,8 @@ public class UserResource {
      */
     @PutMapping("/{identification}")
     @ApiOperation(value = "Update a user", notes = "Service for update the info of a user")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was updated correctly"), @ApiResponse(code = 404, message = "User was not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was updated correctly"),
+            @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity<User> update(@PathVariable("identification") String identification, @RequestBody User user) {
         User response = service.update(identification, user);
         if (response != null) {
@@ -69,7 +70,8 @@ public class UserResource {
      */
     @DeleteMapping("/{identification}")
     @ApiOperation(value = "Delete user", notes = "Service for delete a user")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was deleted"), @ApiResponse(code = 404, message = "User was not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was deleted"),
+            @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity delete(@PathVariable("identification") String identification) {
         if (service.delete(identification)) {
             return new ResponseEntity(HttpStatus.OK);
@@ -85,7 +87,8 @@ public class UserResource {
      */
     @GetMapping("/all/{page}")
     @ApiOperation(value = "List all users", notes = "Service for list all users")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Users listed correctly"), @ApiResponse(code = 404, message = "Users not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Users listed correctly"),
+            @ApiResponse(code = 404, message = "Users not found")})
     public ResponseEntity<List<User>> findAll(@PathVariable("page") int page) {
         return ResponseEntity.ok(service.findAll(page));
     }
@@ -98,7 +101,8 @@ public class UserResource {
      */
     @GetMapping("/{identification}")
     @ApiOperation(value = "Find a user by identification", notes = "Service for find a user by identification card")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was found"), @ApiResponse(code = 404, message = "User was not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "User was found"),
+            @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity<User> findByIdentification(@PathVariable("identification") String identification) {
         User response = service.findByIdentificationCard(identification);
         if (response != null) {
@@ -116,7 +120,8 @@ public class UserResource {
      */
     @GetMapping("/byName/{page}")
     @ApiOperation(value = "List users by name", notes = "Service for list users by a specific name")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "User listed correctly"), @ApiResponse(code = 404, message = "Users not found")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "User listed correctly"),
+            @ApiResponse(code = 404, message = "Users not found")})
     public ResponseEntity<List<User>> findByName(@PathVariable("page") int page, String name) {
         return ResponseEntity.ok(service.findByName(name, page));
     }
@@ -131,7 +136,8 @@ public class UserResource {
      */
     @PutMapping("/{identification}/change-password")
     @ApiOperation(value = "Change Password", notes = "Service for change the password of a user")
-    @ApiResponses(value = {@ApiResponse(code = 200, message = "Password was changed correctly"), @ApiResponse(code = 400, message = "Invalid Request")})
+    @ApiResponses(value = {@ApiResponse(code = 200, message = "Password was changed correctly"),
+            @ApiResponse(code = 400, message = "Invalid Request")})
     public ResponseEntity changePassword(@PathVariable("identification") String identification, String oldPass, String newPass) {
         if (service.changePassword(identification, oldPass, newPass)) {
             return new ResponseEntity(HttpStatus.OK);

@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.transaction.annotation.Transactional;
 import co.gov.ids.stationerycontrol.user.domain.User;
+import org.springframework.transaction.annotation.Transactional;
 import co.gov.ids.stationerycontrol.user.framework.persistence.mapper.UserMapper;
 import co.gov.ids.stationerycontrol.user.framework.persistence.entities.UserEntity;
 import co.gov.ids.stationerycontrol.user.framework.persistence.repositories.IUserRepository;
@@ -14,7 +14,7 @@ import co.gov.ids.stationerycontrol.user.framework.persistence.repositories.IUse
  * Class that implements IUserService.
  *
  * @author Sergio Rodriguez
- * @version 0.0.1
+ * @version 0.0.2
  * @since 2020
  */
 @Service
@@ -34,8 +34,11 @@ public class UserServiceImplementation implements IUserService {
     @Override
     @Transactional
     public User create(User user) {
-        UserEntity entity = UserMapper.toEntity(user);
-        entity.setPassword("pass-" + user.getIdentificationCard());
+        UserEntity entity = repository.findByIdentificationCard(user.getIdentificationCard());
+        if (entity == null) {
+            entity = UserMapper.toEntity(user);
+            entity.setPassword("pass-" + user.getIdentificationCard());
+        }
         return UserMapper.toDomain(repository.save(entity));
     }
 
