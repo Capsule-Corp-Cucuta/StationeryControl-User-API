@@ -7,7 +7,7 @@ import co.gov.ids.stationerycontrol.user.domain.User;
  * Interface that represents the use cases of Users.
  *
  * @author Sergio Rodriguez
- * @version 0.0.1
+ * @version 0.0.2
  * @since 2020
  */
 public interface IUserService {
@@ -33,9 +33,8 @@ public interface IUserService {
      * Function to delete an User by the identification card.
      *
      * @param identificationCard number of the document that identified the user.
-     * @return true if User was deleted or false if do not.
      */
-    public boolean delete(String identificationCard);
+    public void delete(String identificationCard);
 
     /**
      * Function to list all Users on pages of 20 items.
@@ -68,8 +67,7 @@ public interface IUserService {
      * @param identificationCard number of the document that identified the user.
      * @param oldPass            String that represents the actual password of the User.
      * @param newPass            String that represents the new password of the User.
-     * @return true if the password changes or false if do not.
      */
-    public boolean changePassword(String identificationCard, String oldPass, String newPass);
+    public void changePassword(String identificationCard, String oldPass, String newPass);
 
 }

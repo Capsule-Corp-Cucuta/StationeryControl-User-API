@@ -15,7 +15,7 @@ import co.gov.ids.stationerycontrol.user.application.services.IUserService;
  * Class to represent a RESTController - User Resource.
  *
  * @author Sergio Rodriguez
- * @version 0.0.1
+ * @version 0.0.2
  * @since 2020
  */
 @RestController
@@ -73,10 +73,8 @@ public class UserResource {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "User was deleted"),
             @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity delete(@PathVariable("identification") String identification) {
-        if (service.delete(identification)) {
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        service.delete(identification);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     /**
@@ -139,10 +137,8 @@ public class UserResource {
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Password was changed correctly"),
             @ApiResponse(code = 400, message = "Invalid Request")})
     public ResponseEntity changePassword(@PathVariable("identification") String identification, String oldPass, String newPass) {
-        if (service.changePassword(identification, oldPass, newPass)) {
-            return new ResponseEntity(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        service.changePassword(identification, oldPass, newPass);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
 }

@@ -1,7 +1,9 @@
 co.gov.ids.stationerycontrol.user
+co.gov.ids.stationerycontrol.user.application.exceptions
 co.gov.ids.stationerycontrol.user.application.services
 co.gov.ids.stationerycontrol.user.domain
 co.gov.ids.stationerycontrol.user.framework.configuration
+co.gov.ids.stationerycontrol.user.framework.configuration.exception
 co.gov.ids.stationerycontrol.user.framework.persistence.entities
 co.gov.ids.stationerycontrol.user.framework.persistence.mapper
 co.gov.ids.stationerycontrol.user.framework.persistence.repositories

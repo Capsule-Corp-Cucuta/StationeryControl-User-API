@@ -2,6 +2,8 @@ package co.gov.ids.stationerycontrol.user.application.services;
 
 import java.util.List;
 import java.util.ArrayList;
+import co.gov.ids.stationerycontrol.user.application.exceptions.BadRequestException;
+import co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
 import co.gov.ids.stationerycontrol.user.domain.User;
@@ -14,7 +16,7 @@ import co.gov.ids.stationerycontrol.user.framework.persistence.repositories.IUse
  * Class that implements IUserService.
  *
  * @author Sergio Rodriguez
- * @version 0.0.2
+ * @version 0.0.3
  * @since 2020
  */
 @Service
@@ -35,10 +37,11 @@ public class UserServiceImplementation implements IUserService {
     @Transactional
     public User create(User user) {
         UserEntity entity = repository.findByIdentificationCard(user.getIdentificationCard());
-        if (entity == null) {
-            entity = UserMapper.toEntity(user);
-            entity.setPassword("pass-" + user.getIdentificationCard());
+        if (entity != null) {
+            throw new BadRequestException("User exist already");
         }
+        entity = UserMapper.toEntity(user);
+        entity.setPassword("pass-" + user.getIdentificationCard());
         return UserMapper.toDomain(repository.save(entity));
     }
 
@@ -48,15 +51,18 @@ public class UserServiceImplementation implements IUserService {
     @Override
     @Transactional
     public User update(String identificationCard, User user) {
-        UserEntity entity = repository.findByIdentificationCard(identificationCard);
-        if (entity != null) {
-            entity.setName(user.getName());
-            entity.setEmail(user.getEmail());
-            entity.setPhone(user.getPhone());
-            entity.setUserType(user.getUserType());
-            return UserMapper.toDomain(repository.save(entity));
+        if (identificationCard != user.getIdentificationCard()) {
+            throw new BadRequestException("The Identification Card does not agree with the User");
         }
-        return null;
+        UserEntity entity = repository.findByIdentificationCard(identificationCard);
+        if (entity == null) {
+            throw new NotFoundException("User not found");
+        }
+        entity.setName(user.getName());
+        entity.setEmail(user.getEmail());
+        entity.setPhone(user.getPhone());
+        entity.setUserType(user.getUserType());
+        return UserMapper.toDomain(repository.save(entity));
     }
 
     /**
@@ -64,13 +70,12 @@ public class UserServiceImplementation implements IUserService {
      */
     @Override
     @Transactional
-    public boolean delete(String identificationCard) {
+    public void delete(String identificationCard) {
         UserEntity entity = repository.findByIdentificationCard(identificationCard);
-        if (entity != null) {
-            repository.delete(entity);
-            return true;
+        if (entity == null) {
+            throw new NotFoundException("User not found");
         }
-        return false;
+        repository.delete(entity);
     }
 
     /**
@@ -83,6 +88,9 @@ public class UserServiceImplementation implements IUserService {
         for (UserEntity entity : repository.findAll(PageRequest.of(page, SIZE_PAGE)).getContent()) {
             users.add(UserMapper.toDomain(entity));
         }
+        if (users.isEmpty()) {
+            throw new NotFoundException("Users not found");
+        }
         return users;
     }
 
@@ -93,10 +101,10 @@ public class UserServiceImplementation implements IUserService {
     @Transactional
     public User findByIdentificationCard(String identificationCard) {
         UserEntity entity = repository.findByIdentificationCard(identificationCard);
-        if (entity != null) {
-            return UserMapper.toDomain(entity);
+        if (entity == null) {
+            throw new NotFoundException("User not found");
         }
-        return null;
+        return UserMapper.toDomain(entity);
     }
 
     /**
@@ -109,6 +117,9 @@ public class UserServiceImplementation implements IUserService {
         for (UserEntity entity : repository.findByNameContainingIgnoreCase(name, PageRequest.of(page, SIZE_PAGE)).getContent()) {
             users.add(UserMapper.toDomain(entity));
         }
+        if (users.isEmpty()) {
+            throw new NotFoundException("Users not found");
+        }
         return users;
     }
 
@@ -117,14 +128,16 @@ public class UserServiceImplementation implements IUserService {
      */
     @Override
     @Transactional
-    public boolean changePassword(String identificationCard, String oldPass, String newPass) {
+    public void changePassword(String identificationCard, String oldPass, String newPass) {
         UserEntity entity = repository.findByIdentificationCard(identificationCard);
-        if (entity != null && entity.getPassword().equals(oldPass)) {
-            entity.setPassword(newPass);
-            repository.save(entity);
-            return true;
+        if (entity == null) {
+            throw new NotFoundException("User not found");
         }
-        return false;
+        if (!entity.getPassword().equals(oldPass)) {
+            throw new BadRequestException("Current passwords don't match");
+        }
+        entity.setPassword(newPass);
+        repository.save(entity);
     }
 
 }
