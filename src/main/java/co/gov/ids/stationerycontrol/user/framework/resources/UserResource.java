@@ -15,7 +15,7 @@ import co.gov.ids.stationerycontrol.user.application.services.IUserService;
  * Class to represent a RESTController - User Resource.
  *
  * @author Sergio Rodriguez
- * @version 0.0.2
+ * @version 0.0.3
  * @since 2020
  */
 @RestController
@@ -116,11 +116,11 @@ public class UserResource {
      * @param name name of User to find.
      * @return List of 20 Users or less named like param.
      */
-    @GetMapping("/byName/{page}")
+    @GetMapping("/name/{name}/{page}")
     @ApiOperation(value = "List users by name", notes = "Service for list users by a specific name")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "User listed correctly"),
             @ApiResponse(code = 404, message = "Users not found")})
-    public ResponseEntity<List<User>> findByName(@PathVariable("page") int page, String name) {
+    public ResponseEntity<List<User>> findByName(@PathVariable("page") int page, @PathVariable("name") String name) {
         return ResponseEntity.ok(service.findByName(name, page));
     }
 
@@ -132,7 +132,7 @@ public class UserResource {
      * @param newPass        String that represents the new password of the User.
      * @return 200 code.
      */
-    @PutMapping("/{identification}/change-password")
+    @PostMapping("/{identification}/change-password")
     @ApiOperation(value = "Change Password", notes = "Service for change the password of a user")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Password was changed correctly"),
             @ApiResponse(code = 400, message = "Invalid Request")})

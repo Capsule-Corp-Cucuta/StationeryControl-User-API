@@ -16,14 +16,14 @@ import co.gov.ids.stationerycontrol.user.framework.persistence.repositories.IUse
  * Class that implements IUserService.
  *
  * @author Sergio Rodriguez
- * @version 0.0.3
+ * @version 0.0.4
  * @since 2020
  */
 @Service
 @Transactional(readOnly = true)
 public class UserServiceImplementation implements IUserService {
 
-    private final int SIZE_PAGE = 20;
+    private final int SIZE_PAGE = 25;
     private final IUserRepository repository;
 
     public UserServiceImplementation(IUserRepository repository) {
@@ -51,7 +51,7 @@ public class UserServiceImplementation implements IUserService {
     @Override
     @Transactional
     public User update(String identificationCard, User user) {
-        if (identificationCard != user.getIdentificationCard()) {
+        if (!identificationCard.equals(user.getIdentificationCard())) {
             throw new BadRequestException("The Identification Card does not agree with the User");
         }
         UserEntity entity = repository.findByIdentificationCard(identificationCard);

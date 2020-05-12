@@ -18,7 +18,7 @@ public interface IUserService {
      * @param user User to will be created.
      * @return User created.
      */
-    public User create(User user);
+    User create(User user);
 
     /**
      * Function to update an User.
@@ -27,14 +27,14 @@ public interface IUserService {
      * @param user               User to will be updated.
      * @return User updated.
      */
-    public User update(String identificationCard, User user);
+    User update(String identificationCard, User user);
 
     /**
      * Function to delete an User by the identification card.
      *
      * @param identificationCard number of the document that identified the user.
      */
-    public void delete(String identificationCard);
+    void delete(String identificationCard);
 
     /**
      * Function to list all Users on pages of 20 items.
@@ -42,7 +42,7 @@ public interface IUserService {
      * @param page number of page to list.
      * @return List of 20 Users.
      */
-    public List<User> findAll(int page);
+    List<User> findAll(int page);
 
     /**
      * Function to find an User by identification card.
@@ -50,7 +50,7 @@ public interface IUserService {
      * @param identificationCard number of the document that identified the user.
      * @return User identified by param.
      */
-    public User findByIdentificationCard(String identificationCard);
+    User findByIdentificationCard(String identificationCard);
 
     /**
      * Function to list Users by name on pages of 20 items.
@@ -59,7 +59,7 @@ public interface IUserService {
      * @param page number of page to list.
      * @return List of Users by name.
      */
-    public List<User> findByName(String name, int page);
+    List<User> findByName(String name, int page);
 
     /**
      * Function to change the password of an User.
@@ -68,6 +68,6 @@ public interface IUserService {
      * @param oldPass            String that represents the actual password of the User.
      * @param newPass            String that represents the new password of the User.
      */
-    public void changePassword(String identificationCard, String oldPass, String newPass);
+    void changePassword(String identificationCard, String oldPass, String newPass);
 
 }

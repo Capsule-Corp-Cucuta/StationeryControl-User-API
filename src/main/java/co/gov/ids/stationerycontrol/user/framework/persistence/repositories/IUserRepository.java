@@ -20,7 +20,7 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
      * @param identificationCard number of the document that identified the user.
      * @return User identified by param.
      */
-    public UserEntity findByIdentificationCard(String identificationCard);
+    UserEntity findByIdentificationCard(String identificationCard);
 
     /**
      * Function to find Users by name.
@@ -29,6 +29,6 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
      * @param page page for search.
      * @return List of Users named like param.
      */
-    public Page<UserEntity> findByNameContainingIgnoreCase(String name, Pageable page);
+    Page<UserEntity> findByNameContainingIgnoreCase(String name, Pageable page);
 
 }
