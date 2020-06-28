@@ -1,7 +1,7 @@
-package co.gov.ids.stationerycontrol.user.framework.persistence.mapper;
+package co.gov.ids.stationerycontrol.user.infraestructure.persistence.mapper;
 
 import co.gov.ids.stationerycontrol.user.domain.User;
-import co.gov.ids.stationerycontrol.user.framework.persistence.entities.UserEntity;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity;
 
 /**
  * Class to map User and UserEntity.

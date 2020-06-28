@@ -13,7 +13,7 @@ spring:
   profiles:
     active: dev
   datasource:
-    url: jdbc:h2:file:~/stationerycontrol-user
+    url: jdbc:h2:file:~/stationerycontrol-user;AUTO_SERVER=TRUE
     driver-class-name: org.h2.Driver
     username: sa
     password:
@@ -41,3 +41,12 @@ eureka:
   instance:
     instanceId: ${spring.application.name}:${server.port}
     preferIpAddress: true
+
+#Feign configuration
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 12000
+        readTimeout: 12000
+        loggerLevel: basic

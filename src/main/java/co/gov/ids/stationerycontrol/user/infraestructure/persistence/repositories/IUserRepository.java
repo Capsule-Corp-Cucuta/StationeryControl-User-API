@@ -1,9 +1,10 @@
-package co.gov.ids.stationerycontrol.user.framework.persistence.repositories;
+package co.gov.ids.stationerycontrol.user.infraestructure.persistence.repositories;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
-import co.gov.ids.stationerycontrol.user.framework.persistence.entities.UserEntity;
+
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity;
 
 /**
  * Interface that define the available operations to DB.

@@ -2,15 +2,19 @@ package co.gov.ids.stationerycontrol.user.application.services;
 
 import java.util.List;
 import java.util.ArrayList;
-import co.gov.ids.stationerycontrol.user.application.exceptions.BadRequestException;
-import co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
-import co.gov.ids.stationerycontrol.user.domain.User;
+import org.springframework.security.crypto.bcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import co.gov.ids.stationerycontrol.user.framework.persistence.mapper.UserMapper;
-import co.gov.ids.stationerycontrol.user.framework.persistence.entities.UserEntity;
-import co.gov.ids.stationerycontrol.user.framework.persistence.repositories.IUserRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import co.gov.ids.stationerycontrol.user.domain.User;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.mapper.UserMapper;
+import co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity;
+import co.gov.ids.stationerycontrol.user.application.exceptions.BadRequestException;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.repositories.IUserRepository;
 
 /**
  * Class that implements IUserService.
@@ -25,6 +29,9 @@ public class UserServiceImplementation implements IUserService {
 
     private final int SIZE_PAGE = 25;
     private final IUserRepository repository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCrypt;
 
     public UserServiceImplementation(IUserRepository repository) {
         this.repository = repository;
@@ -41,7 +48,7 @@ public class UserServiceImplementation implements IUserService {
             throw new BadRequestException("User exist already");
         }
         entity = UserMapper.toEntity(user);
-        entity.setPassword("pass-" + user.getIdentificationCard());
+        entity.setPassword(bCrypt.encode(user.getIdentificationCard()));
         return UserMapper.toDomain(repository.save(entity));
     }
 
@@ -133,10 +140,10 @@ public class UserServiceImplementation implements IUserService {
         if (entity == null) {
             throw new NotFoundException("User not found");
         }
-        if (!entity.getPassword().equals(oldPass)) {
+        if (!BCrypt.checkpw(oldPass, entity.getPassword())) {
             throw new BadRequestException("Current passwords don't match");
         }
-        entity.setPassword(newPass);
+        entity.setPassword(bCrypt.encode(newPass));
         repository.save(entity);
     }
 

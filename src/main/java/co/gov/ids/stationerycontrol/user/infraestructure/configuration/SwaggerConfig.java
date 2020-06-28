@@ -1,4 +1,4 @@
-package co.gov.ids.stationerycontrol.user.framework.configuration;
+package co.gov.ids.stationerycontrol.user.infraestructure.configuration;
 
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.builders.PathSelectors;

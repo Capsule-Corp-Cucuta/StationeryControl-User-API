@@ -1,4 +1,4 @@
-package co.gov.ids.stationerycontrol.user.framework.configuration.exception;
+package co.gov.ids.stationerycontrol.user.infraestructure.configuration.exception;
 
 import java.util.List;
 import java.util.Arrays;

@@ -1,12 +1,13 @@
-package co.gov.ids.stationerycontrol.user.framework.configuration.exception;
+package co.gov.ids.stationerycontrol.user.infraestructure.configuration.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
+
 import co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException;
 import co.gov.ids.stationerycontrol.user.application.exceptions.BadRequestException;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
  * Class to handle internal exceptions.

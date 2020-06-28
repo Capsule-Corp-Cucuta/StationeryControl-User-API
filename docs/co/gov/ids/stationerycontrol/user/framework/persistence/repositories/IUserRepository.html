@@ -116,7 +116,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <!-- ======== START OF CLASS DATA ======== -->
 <main role="main">
 <div class="header">
-<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">co.gov.ids.stationerycontrol.user.framework.persistence.repositories</a></div>
+<div class="subTitle"><span class="packageLabelInType">Package</span>&nbsp;<a href="package-summary.html">co.gov.ids.stationerycontrol.user.infraestructure.persistence.repositories</a></div>
 <h2 title="Interface IUserRepository" class="title">Interface IUserRepository</h2>
 </div>
 <div class="contentContainer">
@@ -125,11 +125,11 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <li class="blockList">
 <dl>
 <dt>All Superinterfaces:</dt>
-<dd><code>org.springframework.data.repository.CrudRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.PagingAndSortingRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.query.QueryByExampleExecutor&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>&gt;</code>, <code>org.springframework.data.repository.Repository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code></dd>
+<dd><code>org.springframework.data.repository.CrudRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.PagingAndSortingRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code>, <code>org.springframework.data.repository.query.QueryByExampleExecutor&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>&gt;</code>, <code>org.springframework.data.repository.Repository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</code></dd>
 </dl>
 <hr>
 <pre>public interface <span class="typeNameLabel">IUserRepository</span>
-extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</pre>
+extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>,&#8203;java.lang.Long&gt;</pre>
 <div class="block">Interface that define the available operations to DB.</div>
 <dl>
 <dt><span class="simpleTagLabel">Since:</span></dt>
@@ -156,14 +156,14 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../ent
 <th class="colLast" scope="col">Description</th>
 </tr>
 <tr id="i0" class="altColor">
-<td class="colFirst"><code><a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a></code></td>
+<td class="colFirst"><code><a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a></code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findByIdentificationCard(java.lang.String)">findByIdentificationCard</a></span>&#8203;(java.lang.String&nbsp;identificationCard)</code></th>
 <td class="colLast">
 <div class="block">Function to find a user by identification card number.</div>
 </td>
 </tr>
 <tr id="i1" class="rowColor">
-<td class="colFirst"><code>org.springframework.data.domain.Page&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>&gt;</code></td>
+<td class="colFirst"><code>org.springframework.data.domain.Page&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>&gt;</code></td>
 <th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#findByNameContainingIgnoreCase(java.lang.String,org.springframework.data.domain.Pageable)">findByNameContainingIgnoreCase</a></span>&#8203;(java.lang.String&nbsp;name,
                               org.springframework.data.domain.Pageable&nbsp;page)</code></th>
 <td class="colLast">
@@ -221,7 +221,7 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../ent
 <ul class="blockList">
 <li class="blockList">
 <h4>findByIdentificationCard</h4>
-<pre class="methodSignature"><a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>&nbsp;findByIdentificationCard&#8203;(java.lang.String&nbsp;identificationCard)</pre>
+<pre class="methodSignature"><a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>&nbsp;findByIdentificationCard&#8203;(java.lang.String&nbsp;identificationCard)</pre>
 <div class="block">Function to find a user by identification card number.</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -237,7 +237,7 @@ extends org.springframework.data.jpa.repository.JpaRepository&lt;<a href="../ent
 <ul class="blockListLast">
 <li class="blockList">
 <h4>findByNameContainingIgnoreCase</h4>
-<pre class="methodSignature">org.springframework.data.domain.Page&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.framework.persistence.entities">UserEntity</a>&gt;&nbsp;findByNameContainingIgnoreCase&#8203;(java.lang.String&nbsp;name,
+<pre class="methodSignature">org.springframework.data.domain.Page&lt;<a href="../entities/UserEntity.html" title="class in co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities">UserEntity</a>&gt;&nbsp;findByNameContainingIgnoreCase&#8203;(java.lang.String&nbsp;name,
                                                                                 org.springframework.data.domain.Pageable&nbsp;page)</pre>
 <div class="block">Function to find Users by name.</div>
 <dl>

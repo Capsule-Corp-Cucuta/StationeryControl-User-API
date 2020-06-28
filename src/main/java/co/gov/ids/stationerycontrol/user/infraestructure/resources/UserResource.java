@@ -1,4 +1,4 @@
-package co.gov.ids.stationerycontrol.user.framework.resources;
+package co.gov.ids.stationerycontrol.user.infraestructure.resources;
 
 import java.util.List;
 import io.swagger.annotations.Api;
@@ -8,6 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 import co.gov.ids.stationerycontrol.user.domain.User;
 import co.gov.ids.stationerycontrol.user.application.services.IUserService;
 

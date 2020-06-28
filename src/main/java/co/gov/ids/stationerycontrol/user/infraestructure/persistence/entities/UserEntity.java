@@ -1,8 +1,9 @@
-package co.gov.ids.stationerycontrol.user.framework.persistence.entities;
+package co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities;
 
 import lombok.Data;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import co.gov.ids.stationerycontrol.user.domain.UserType;
 
 /**
