@@ -31,5 +31,4 @@ public interface IUserRepository extends JpaRepository<UserEntity, Long> {
      * @return List of Users named like param.
      */
     Page<UserEntity> findByNameContainingIgnoreCase(String name, Pageable page);
-
 }

@@ -52,7 +52,7 @@ public class UserResource {
      * @return User updated, 200 code.
      */
     @PutMapping("/{identification}")
-    @ApiOperation(value = "Update a user", notes = "Service for update the info of a user")
+    @ApiOperation(value = "Update a user", notes = "Service for update the info of an user")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "User was updated correctly"),
             @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity<User> update(@PathVariable("identification") String identification, @RequestBody User user) {
@@ -70,7 +70,7 @@ public class UserResource {
      * @return 200 code.
      */
     @DeleteMapping("/{identification}")
-    @ApiOperation(value = "Delete user", notes = "Service for delete a user")
+    @ApiOperation(value = "Delete user", notes = "Service for delete an user")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "User was deleted"),
             @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity delete(@PathVariable("identification") String identification) {
@@ -99,7 +99,7 @@ public class UserResource {
      * @return User identified by param.
      */
     @GetMapping("/{identification}")
-    @ApiOperation(value = "Find a user by identification", notes = "Service for find a user by identification card")
+    @ApiOperation(value = "Find a user by identification", notes = "Service for find an user by identification card")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "User was found"),
             @ApiResponse(code = 404, message = "User was not found")})
     public ResponseEntity<User> findByIdentification(@PathVariable("identification") String identification) {
@@ -134,12 +134,35 @@ public class UserResource {
      * @return 200 code.
      */
     @PostMapping("/{identification}/change-password")
-    @ApiOperation(value = "Change Password", notes = "Service for change the password of a user")
+    @ApiOperation(value = "Change Password", notes = "Service for change the password of an user")
     @ApiResponses(value = {@ApiResponse(code = 200, message = "Password was changed correctly"),
             @ApiResponse(code = 400, message = "Invalid Request")})
     public ResponseEntity changePassword(@PathVariable("identification") String identification, String oldPass, String newPass) {
         service.changePassword(identification, oldPass, newPass);
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * PUT Method for request for a mail of recover password.
+     *
+     * @param identification number of the document that identified the user.
+     * @return 200 code.
+     */
+    @PutMapping("/{identification}/recover-password")
+    @ApiOperation(value = "Recover Password", notes = "Service for send a mail to recover the password of an user")
+    public ResponseEntity recoverPassword(@PathVariable("identification") String identification) {
+        service.recoverPassword(identification);
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    /**
+     * GET Method for count users registered on the system.
+     *
+     * @return number of users registered.
+     */
+    @GetMapping("/count")
+    public ResponseEntity<Long> count() {
+        return ResponseEntity.ok(service.countUsers());
     }
 
 }

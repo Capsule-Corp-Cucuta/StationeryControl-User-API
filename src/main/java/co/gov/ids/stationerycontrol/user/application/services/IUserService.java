@@ -71,4 +71,17 @@ public interface IUserService {
      */
     void changePassword(String identificationCard, String oldPass, String newPass);
 
+    /**
+     * Function for get a mail for recover password of an user.
+     *
+     * @param identificationCard numebr of the document that idendified the user.
+     */
+    void recoverPassword(String identificationCard);
+
+    /**
+     * Function to get the count of users registered.
+     *
+     * @return the number of users registered.
+     */
+    long countUsers();
 }

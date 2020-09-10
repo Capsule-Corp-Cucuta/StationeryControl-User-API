@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence-diagram version="1.2.4" icons="true" generate-combined-fragments="true">  
+  <object id="1" language="java" name="co.gov.ids.stationerycontrol.user.App" project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/App.java" binary="false" label="app" type="class" 
+    autoSize="true">    
+    <position height="-1" width="-1" x="178" y="0"/>    
+    <execution id="2">      
+      <position height="392" width="144" x="5" y="79"/>    
+    </execution>    
+    <execution id="5">      
+      <position height="21" width="7" x="74" y="261"/>    
+    </execution>  
+  </object>  
+  <object id="6" language="java" name="co.gov.ids.stationerycontrol.user.infraestructure.resources.UserResource" 
+    project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/infraestructure/resources/UserResource.java" 
+    binary="false" label="userResource" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="414" y="0"/>    
+    <execution id="4">      
+      <position height="350" width="252" x="153" y="100"/>    
+    </execution>    
+    <execution id="9">      
+      <position height="42" width="7" x="276" y="261"/>    
+    </execution>  
+  </object>  
+  <object id="11" language="java" name="co.gov.ids.stationerycontrol.user.application.services.IUserService" 
+    project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/application/services/IUserService.java" 
+    binary="false" label="iUserService" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="520" y="0"/>    
+    <execution id="8">      
+      <position height="329" width="230" x="409" y="100"/>    
+    </execution>  
+  </object>  
+  <object id="14" language="java" 
+    name="co.gov.ids.stationerycontrol.user.application.services.UserServiceImplementation" project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/application/services/UserServiceImplementation.java" 
+    binary="false" label="userServiceImplementation" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="844" y="0"/>    
+    <execution id="13">      
+      <position height="308" width="230" x="643" y="100"/>    
+    </execution>    
+    <execution id="17">      
+      <position height="245" width="7" x="755" y="121"/>    
+    </execution>    
+    <execution id="22">      
+      <position height="63" width="7" x="758" y="261"/>    
+    </execution>  
+  </object>  
+  <object id="24" language="java" name="co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException" 
+    project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/application/exceptions/NotFoundException.java" 
+    binary="false" label="notFoundException" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="1036" y="0"/>    
+    <execution id="19">      
+      <position height="21" width="239" x="877" y="185"/>    
+    </execution>  
+  </object>  
+  <object id="25" language="java" name="co.gov.ids.stationerycontrol.user.infraestructure.persistence.mapper.UserMapper" 
+    project="user-api" 
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/infraestructure/persistence/mapper/UserMapper.java" 
+    binary="false" label="userMapper" type="class" autoSize="true">    
+    <position height="-1" width="-1" x="1252" y="0"/>    
+    <execution id="21">      
+      <position height="108" width="293" x="1120" y="237"/>    
+    </execution>  
+  </object>  
+  <object id="27" language="java" 
+    name="co.gov.ids.stationerycontrol.user.infraestructure.persistence.repositories.IUserRepository" project="user-api" 
+    
+    file="/user-api/src/main/java/co/gov/ids/stationerycontrol/user/infraestructure/persistence/repositories/IUserRepository.java" 
+    binary="false" label="iUserRepository" type="interface" autoSize="true">    
+    <position height="-1" width="-1" x="1292" y="0"/>    
+    <execution id="16">      
+      <position height="287" width="310" x="1417" y="100"/>    
+    </execution>  
+  </object>  
+  <combined-fragment id="29" interaction-operator="NEG">    
+    <interaction-operand id="30">      
+      <fragment refId="18"/>    
+    </interaction-operand>  
+  </combined-fragment>  
+  <message id="3" operation="findByIdentification(java.lang.String):org.springframework.http.ResponseEntity&lt;User&gt;" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="4"/>  
+  </message>  
+  <message id="7" operation="findByIdentificationCard(java.lang.String):co.gov.ids.stationerycontrol.user.domain.User" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
+  </message>  
+  <message id="10" asynchronous="false">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </message>  
+  <message id="12" operation="findByIdentificationCard(java.lang.String):co.gov.ids.stationerycontrol.user.domain.User" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="13"/>  
+  </message>  
+  <message id="15" 
+    operation="findByIdentificationCard(java.lang.String):co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="16"/>  
+  </message>  
+  <message id="18" operation="NotFoundException(java.lang.String)" asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="19"/>  
+  </message>  
+  <message id="20" 
+    operation="toDomain(co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity):co.gov.ids.stationerycontrol.user.domain.User" 
+    asynchronous="false">    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="21"/>  
+  </message>  
+  <message id="23" asynchronous="false">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="9"/>  
+  </message>  
+  <message id="26" asynchronous="false">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="22"/>  
+  </message>  
+  <message id="28" asynchronous="false">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="17"/>  
+  </message>
+</sequence-diagram>

@@ -2,19 +2,24 @@ package co.gov.ids.stationerycontrol.user.application.services;
 
 import java.util.List;
 import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.PageRequest;
+import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import co.gov.ids.stationerycontrol.user.domain.User;
-import co.gov.ids.stationerycontrol.user.infraestructure.persistence.mapper.UserMapper;
+import co.gov.ids.stationerycontrol.user.infraestructure.mail.EmailBody;
+import co.gov.ids.stationerycontrol.user.infraestructure.mail.EmailPort;
 import co.gov.ids.stationerycontrol.user.application.exceptions.NotFoundException;
-import co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity;
 import co.gov.ids.stationerycontrol.user.application.exceptions.BadRequestException;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.mapper.UserMapper;
+import co.gov.ids.stationerycontrol.user.infraestructure.persistence.entities.UserEntity;
 import co.gov.ids.stationerycontrol.user.infraestructure.persistence.repositories.IUserRepository;
+
 
 /**
  * Class that implements IUserService.
@@ -29,6 +34,9 @@ public class UserServiceImplementation implements IUserService {
 
     private final int SIZE_PAGE = 25;
     private final IUserRepository repository;
+
+    @Autowired
+    private EmailPort emailPort;
 
     @Autowired
     private BCryptPasswordEncoder bCrypt;
@@ -145,6 +153,39 @@ public class UserServiceImplementation implements IUserService {
         }
         entity.setPassword(bCrypt.encode(newPass));
         repository.save(entity);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public void recoverPassword(String identificationCard) {
+        UserEntity entity = repository.findByIdentificationCard(identificationCard);
+        if (entity == null) {
+            throw new NotFoundException("User not found");
+        }
+        RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange(48, 90)
+                .build();
+        String newPass = pwdGenerator.generate(12);
+        entity.setPassword(bCrypt.encode(newPass));
+        repository.save(entity);
+        EmailBody emailBody = new EmailBody();
+        emailBody.setEmail(entity.getEmail());
+        emailBody.setSubject("Cambio de contraseña");
+        emailBody.setContent("Con esta nueva contraseña podrá ingresar a la plataforma: \n " +
+                "\t " + newPass +
+                "\n recomendamos cambie esta contraseña desde la plataforma.");
+        emailPort.sendEmail(emailBody);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    @Transactional
+    public long countUsers() {
+        return repository.count();
     }
 
 }
