@@ -7,7 +7,7 @@ import co.gov.ids.stationerycontrol.user.domain.dto.UserType;
 
 @Data
 @Entity
-@Table(name = "user")
+@Table(name = "USERS")
 public class UserEntity {
 
     @Id
