@@ -5,7 +5,8 @@ import lombok.Data;
 @Data
 public class User {
 
-    private String id;
+    private String username;
+    private String identificationCard;
     private String name;
     private String email;
     private String phone;
@@ -13,5 +14,6 @@ public class User {
     private String department;
     private String township;
     private String institution;
+    private boolean enable;
 
 }

@@ -25,22 +25,23 @@ public class UserService {
     }
 
     public User create(User user) {
-        return repository.create(user, bCrypt.encode(user.getId()));
+        user.setEnable(true);
+        return repository.create(user, bCrypt.encode(user.getIdentificationCard()));
     }
 
     public User update(User user) {
         return repository.update(user);
     }
 
-    public boolean delete(String id) {
-        return findById(id).map(user -> {
-            repository.delete(id);
-            return true;
+    public boolean disable(String username) {
+        return findByUsername(username).map(user -> {
+            user.setEnable(false);
+            return repository.update(user) != null;
         }).orElse(false);
     }
 
-    public Optional<User> findById(String id) {
-        return repository.findById(id);
+    public Optional<User> findByUsername(String username) {
+        return repository.findByUsername(username);
     }
 
     public Optional<List<User>> findAll(int page) {
@@ -51,9 +52,13 @@ public class UserService {
         return repository.findByName(name, page);
     }
 
-    public boolean changePassword(String id, String oldPass, String newPass) {
-        return findById(id).map(user -> {
-            if (BCrypt.checkpw(oldPass, repository.getPassword(id))) {
+    public Optional<List<User>> findByIdentificationCard(String identificationCard, int page) {
+        return repository.findByIdentificationCard(identificationCard, page);
+    }
+
+    public boolean changePassword(String username, String oldPass, String newPass) {
+        return findByUsername(username).map(user -> {
+            if (BCrypt.checkpw(oldPass, repository.getPassword(username))) {
                 repository.changePassword(user, bCrypt.encode(newPass));
                 return true;
             }
@@ -61,8 +66,8 @@ public class UserService {
         }).orElse(false);
     }
 
-    public boolean recoverPassword(String id) {
-        return findById(id).map(user -> {
+    public boolean recoverPassword(String username) {
+        return findByUsername(username).map(user -> {
             // Update Password
             RandomStringGenerator pwdGenerator = new RandomStringGenerator.Builder().withinRange(48, 90)
                     .build();

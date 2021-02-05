@@ -29,42 +29,42 @@ public class UserController {
         return new ResponseEntity<>(service.create(user), HttpStatus.CREATED);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/{username}")
     @ApiOperation(value = "Put user", notes = "Service for update the info of an user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User was updated correctly"),
             @ApiResponse(code = 404, message = "User was not found")
     })
-    public ResponseEntity<User> update(@PathVariable("id") String id, @RequestBody User user) {
-        if (service.findById(id).isPresent()) {
+    public ResponseEntity<User> update(@PathVariable("username") String username, @RequestBody User user) {
+        if (service.findByUsername(username).isPresent()) {
             return new ResponseEntity<>(service.update(user), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @DeleteMapping("/{id}")
-    @ApiOperation(value = "Delete user", notes = "Service for delete an user")
+    @PutMapping("/{username}/disable")
+    @ApiOperation(value = "Disable user", notes = "Service for disable an user")
     @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "User was deleted"),
+            @ApiResponse(code = 200, message = "User was disabled"),
             @ApiResponse(code = 404, message = "User was not found")
     })
-    public ResponseEntity delete(@PathVariable("id") String id) {
-        if (service.delete(id)) {
+    public ResponseEntity disable(@PathVariable("username") String username) {
+        if (service.disable(username)) {
             return new ResponseEntity<>(HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
-    @GetMapping("/{id}")
-    @ApiOperation(value = "Get user by id", notes = "Service for find an user by id")
+    @GetMapping("/{username}")
+    @ApiOperation(value = "Get user by username", notes = "Service for find an user by username")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "User was found"),
             @ApiResponse(code = 404, message = "User was not found")
     })
-    public ResponseEntity<User> findById(@PathVariable("id") String id) {
-        return service.findById(id).map(user -> new ResponseEntity<>(user, HttpStatus.OK))
+    public ResponseEntity<User> findByUsername(@PathVariable("username") String username) {
+        return service.findByUsername(username).map(user -> new ResponseEntity<>(user, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
@@ -81,6 +81,20 @@ public class UserController {
         }).orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+    @GetMapping("/identificationCard/{identificationCard}/{page}")
+    @ApiOperation(value = "Get users by identificationCard", notes = "Service for list users by a specific id")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "User listed correctly"),
+            @ApiResponse(code = 404, message = "Users not found")
+    })
+    public ResponseEntity<List<User>> findByIdentificationCard(
+            @PathVariable("page") int page,
+            @PathVariable("identificationCard") String identificationCard) {
+        return service.findByIdentificationCard(identificationCard, page)
+                .map(users -> new ResponseEntity<>(users, HttpStatus.OK))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
+
     @GetMapping("/name/{name}/{page}")
     @ApiOperation(value = "Get users by name", notes = "Service for list users by a specific name")
     @ApiResponses(value = {
@@ -92,8 +106,8 @@ public class UserController {
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
-    @PostMapping("/{id}/change-password")
-    @ApiOperation(value = "Change Password", notes = "Service for change the password of an user by id")
+    @PostMapping("/{username}/change-password")
+    @ApiOperation(value = "Change Password", notes = "Service for change the password of an user by username")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Password was changed correctly"),
             @ApiResponse(code = 400, message = "Invalid Request")
@@ -106,14 +120,14 @@ public class UserController {
         }
     }
 
-    @PutMapping("/{id}/recover-password")
+    @PutMapping("/{username}/recover-password")
     @ApiOperation(value = "Recover Password", notes = "Service for send a mail to recover the password of an user")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Password was changed correctly and email was sent"),
             @ApiResponse(code = 400, message = "Invalid Request")
     })
-    public ResponseEntity recoverPassword(@PathVariable("id") String id) {
-        if (service.recoverPassword(id)) {
+    public ResponseEntity recoverPassword(@PathVariable("username") String username) {
+        if (service.recoverPassword(username)) {
             return new ResponseEntity(HttpStatus.OK);
         } else {
             return new ResponseEntity(HttpStatus.NOT_FOUND);

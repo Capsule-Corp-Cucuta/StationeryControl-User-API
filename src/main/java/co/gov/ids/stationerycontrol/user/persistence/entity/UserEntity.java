@@ -11,15 +11,18 @@ import co.gov.ids.stationerycontrol.user.domain.dto.UserType;
 public class UserEntity {
 
     @Id
-    private String id;
+    private String username;
+
+    @Column(name = "identification_card", updatable = false, nullable = false)
+    private String identificationCard;
 
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String phone;
 
     @Enumerated(EnumType.STRING)
@@ -36,5 +39,8 @@ public class UserEntity {
     private String township;
 
     private String institution;
+
+    @Column(nullable = false)
+    private boolean enable;
 
 }

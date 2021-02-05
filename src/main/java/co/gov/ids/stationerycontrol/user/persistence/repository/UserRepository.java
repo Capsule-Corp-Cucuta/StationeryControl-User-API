@@ -31,18 +31,13 @@ public class UserRepository implements IUserRepository {
     @Override
     public User update(User user) {
         UserEntity entity = mapper.toUserEntity(user);
-        entity.setPassword(getPassword(user.getId()));
+        entity.setPassword(getPassword(user.getUsername()));
         return mapper.toUser(repository.save(entity));
     }
 
     @Override
-    public void delete(String id) {
-        repository.deleteById(id);
-    }
-
-    @Override
-    public Optional<User> findById(String id) {
-        return repository.findById(id).map(userEntity -> mapper.toUser(userEntity));
+    public Optional<User> findByUsername(String username) {
+        return repository.findById(username).map(userEntity -> mapper.toUser(userEntity));
     }
 
     @Override
@@ -57,8 +52,14 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public String getPassword(String id) {
-        return repository.findById(id).map(userEntity -> userEntity.getPassword()).orElse(null);
+    public Optional<List<User>> findByIdentificationCard(String identificationCard, int page) {
+        return repository.findByIdentificationCard(identificationCard, PageRequest.of(page, SIZE_PAGE))
+                .map(userEntities -> mapper.toUsers(userEntities.getContent()));
+    }
+
+    @Override
+    public String getPassword(String username) {
+        return repository.findById(username).map(userEntity -> userEntity.getPassword()).orElse(null);
     }
 
     @Override

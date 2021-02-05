@@ -8,5 +8,7 @@ import co.gov.ids.stationerycontrol.user.persistence.entity.UserEntity;
 
 public interface IUserJPARepository extends PagingAndSortingRepository<UserEntity, String> {
 
+    Optional<Page<UserEntity>> findByIdentificationCard(String identificationCard, Pageable page);
+
     Optional<Page<UserEntity>> findByNameContainingIgnoreCase(String name, Pageable page);
 }

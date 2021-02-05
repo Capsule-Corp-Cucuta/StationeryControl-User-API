@@ -9,7 +9,8 @@ import co.gov.ids.stationerycontrol.user.persistence.entity.UserEntity;
 public interface UserMapper {
 
     @Mappings({
-            @Mapping(source = "id", target = "id"),
+            @Mapping(source = "username", target = "username"),
+            @Mapping(source = "identificationCard", target = "identificationCard"),
             @Mapping(source = "name", target = "name"),
             @Mapping(source = "email", target = "email"),
             @Mapping(source = "phone", target = "phone"),
@@ -17,6 +18,7 @@ public interface UserMapper {
             @Mapping(source = "department", target = "department"),
             @Mapping(source = "township", target = "township"),
             @Mapping(source = "institution", target = "institution"),
+            @Mapping(source = "enable", target = "enable")
     })
     User toUser(UserEntity entity);
 

@@ -10,15 +10,15 @@ public interface IUserRepository {
 
     User update(User user);
 
-    void delete(String id);
-
-    Optional<User> findById(String id);
+    Optional<User> findByUsername(String username);
 
     Optional<List<User>> findAll(int page);
 
+    Optional<List<User>> findByIdentificationCard(String identificationCard, int page);
+
     Optional<List<User>> findByName(String name, int page);
 
-    String getPassword(String id);
+    String getPassword(String username);
 
     void changePassword(User user, String newPass);
 
